@@ -1,0 +1,538 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap');
+
+/* CSS Variables */
+:root {
+  --primary-cyan: #00ffff;
+  --primary-green: #00c832;
+  --matrix-black: #000000;
+  --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+}
+
+/* Base Styles */
+* {
+  font-family: 'JetBrains Mono', 'Inter', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000000;
+}
+
+body {
+  background: #000000;
+  color: #00c832;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ensure Matrix rain is always behind content */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Matrix Theme Neon Effects */
+.neon-glow-dark {
+  box-shadow: 
+    0 0 5px #00ffff,
+    0 0 10px #00ffff,
+    0 0 15px #00ffff,
+    0 0 20px #00ffff;
+}
+
+.matrix-text {
+  color: #00c832;
+  text-shadow: 0 0 10px #00c832;
+}
+
+.matrix-border {
+  border: 1px solid #00ffff;
+  box-shadow: 
+    0 0 5px #00ffff,
+    inset 0 0 5px rgba(0, 255, 255, 0.1);
+}
+
+/* Enhanced Text Visibility with Stronger Contrast */
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
+  filter: contrast(1.2) brightness(1.1);
+}
+
+p, span, div {
+  text-shadow: 0 0 15px rgba(0, 200, 50, 0.6), 0 0 30px rgba(0, 200, 50, 0.3);
+  filter: contrast(1.1);
+}
+
+.text-cyan-400, .text-cyan-300 {
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.4) !important;
+  filter: contrast(1.2) brightness(1.2);
+}
+
+.text-green-600, .text-green-300, .text-green-400 {
+  text-shadow: 0 0 15px rgba(0, 200, 50, 0.7), 0 0 30px rgba(0, 200, 50, 0.4) !important;
+  filter: contrast(1.2) brightness(1.1);
+}
+
+.text-white {
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3) !important;
+  filter: contrast(1.2) brightness(1.2);
+}
+
+/* Navigation Bar Floating Effect */
+nav {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Enhanced Transitions */
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: auto;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* GPU acceleration for smooth animations */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Custom Scrollbar - Matrix Style */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+  border: 1px solid #00ffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00ffff, #00c832);
+  border-radius: 6px;
+  border: 1px solid #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #00c832, #00ffff);
+  box-shadow: 0 0 15px #00ffff;
+}
+
+/* Matrix Animations with Smooth Timing */
+@keyframes matrixFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes matrixPulse {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 10px #00c832;
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 20px #00c832, 0 0 30px #00c832;
+  }
+}
+
+@keyframes matrixGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+  }
+  50% {
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+  }
+}
+
+@keyframes matrixFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes matrixScan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes quantumRipple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Utility Classes */
+.animate-matrix-fade-in {
+  animation: matrixFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-matrix-pulse {
+  animation: matrixPulse 2s ease-in-out infinite;
+}
+
+.animate-matrix-glow {
+  animation: matrixGlow 3s ease-in-out infinite;
+}
+
+.animate-matrix-float {
+  animation: matrixFloat 4s ease-in-out infinite;
+}
+
+/* Focus States - Matrix Style */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black;
+}
+
+/* Gradient Text - Matrix Style */
+.gradient-text {
+  @apply bg-gradient-to-r from-cyan-400 to-green-600 bg-clip-text text-transparent;
+}
+
+/* Card Hover Effects - Matrix Style */
+.card-hover {
+  @apply transition-all duration-300 hover:transform hover:-translate-y-2;
+}
+
+.card-hover:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Button Styles - Matrix Style */
+.btn-primary {
+  @apply bg-gradient-to-r from-cyan-400 to-green-600 text-black px-6 py-3 rounded-lg font-bold transition-all duration-300 border border-cyan-400;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  @apply border-2 border-cyan-400 text-cyan-400 px-6 py-3 rounded-lg font-bold hover:bg-cyan-400/10 transition-all duration-300;
+}
+
+/* Form Styles - Matrix Style */
+.form-input {
+  @apply w-full px-4 py-3 bg-black/70 border border-cyan-400/50 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all text-green-600 font-mono;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Matrix Backdrop Blur */
+.backdrop-blur-matrix {
+  backdrop-filter: blur(12px) brightness(0.3);
+  -webkit-backdrop-filter: blur(12px) brightness(0.3);
+}
+
+/* Loading States - Matrix Style */
+.loading-matrix {
+  background: linear-gradient(90deg, #000000 25%, #00ffff 50%, #000000 75%);
+  background-size: 200% 100%;
+  animation: matrixShimmer 2s infinite;
+}
+
+@keyframes matrixShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Matrix Scan Line Effect */
+.matrix-scan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  animation: matrixScan 3s linear infinite;
+}
+
+/* Matrix Grid Pattern */
+.matrix-grid {
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor {
+  display: inline-block;
+  background-color: #00c832;
+  margin-left: 3px;
+  width: 2px;
+  animation: matrixPulse 1s infinite;
+}
+
+/* Matrix Terminal Effect */
+.matrix-terminal {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #00ffff;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+/* Ensure consistent background across all sections */
+section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Matrix Rain Canvas Positioning - Enhanced for consistency */
+canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Cursor Spotlight Consistency */
+.cursor-spotlight {
+  position: fixed;
+  pointer-events: none;
+  z-index: 30;
+  mix-blend-mode: screen;
+  transition: all 0.1s ease-out;
+}
+
+/* Enhanced NEURION AI Branding */
+.neurion-brand {
+  background: linear-gradient(45deg, #00ffff, #00ff65, #00ffff);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+  filter: contrast(1.3) brightness(1.2) saturate(1.4);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== NAVIGATION BAR STYLES ===== */
+
+/**
+ * Base navigation item styling
+ * Provides foundation for all navigation links
+ */
+.nav-item {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/**
+ * Active navigation item with green glowing effect
+ * Applied to the current page navigation item
+ */
+.nav-item-active {
+  /* Green glow text effect */
+  text-shadow: 
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(0, 255, 255, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.4);
+  
+  /* Subtle background glow */
+  background: rgba(0, 255, 255, 0.1);
+  
+  /* Border glow effect */
+  box-shadow: 
+    0 0 5px rgba(0, 255, 255, 0.3),
+    inset 0 0 5px rgba(0, 255, 255, 0.1);
+  
+  /* Enhanced contrast and brightness */
+  filter: contrast(1.2) brightness(1.2);
+}
+
+/**
+ * Hover effect for navigation items
+ * Smooth transition with subtle glow
+ */
+.nav-item-hover:hover {
+  /* Hover glow effect */
+  text-shadow: 
+    0 0 8px rgba(0, 255, 255, 0.6),
+    0 0 16px rgba(0, 255, 255, 0.4);
+  
+  /* Subtle background on hover */
+  background: rgba(0, 255, 255, 0.05);
+  
+  /* Transform for interactive feedback */
+  transform: translateY(-1px);
+  
+  /* Light border glow */
+  box-shadow: 0 0 3px rgba(0, 255, 255, 0.2);
+}
+
+/**
+ * Special styling for the "Initialize" CTA button
+ * Enhanced visual prominence for contact action
+ */
+.nav-item-cta {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.nav-item-cta:not(.nav-item-active) {
+  background: rgba(0, 200, 50, 0.1);
+  border: 1px solid rgba(0, 200, 50, 0.3);
+}
+
+.nav-item-cta:not(.nav-item-active):hover {
+  background: rgba(0, 200, 50, 0.2);
+  border-color: rgba(0, 200, 50, 0.5);
+  text-shadow: 
+    0 0 10px rgba(0, 200, 50, 0.8),
+    0 0 20px rgba(0, 200, 50, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(0, 200, 50, 0.3),
+    0 0 8px rgba(0, 200, 50, 0.2);
+}
+
+/**
+ * Focus states for accessibility
+ * Ensures keyboard navigation is clearly visible
+ */
+.nav-item:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px rgba(0, 255, 255, 0.5),
+    0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/**
+ * Mobile navigation specific styles
+ * Enhanced touch targets and spacing
+ */
+@media (max-width: 768px) {
+  .nav-item {
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+    min-height: 44px; /* Minimum touch target size */
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-item-active {
+    background: rgba(0, 255, 255, 0.15);
+  }
+  
+  .nav-item-hover:hover {
+    background: rgba(0, 255, 255, 0.1);
+  }
+}
+
+/**
+ * Reduced motion preferences
+ * Respects user accessibility preferences
+ */
+@media (prefers-reduced-motion: reduce) {
+  .nav-item {
+    transition: none;
+  }
+  
+  .nav-item-hover:hover {
+    transform: none;
+  }
+}
+
+/**
+ * High contrast mode support
+ * Ensures visibility in high contrast displays
+ */
+@media (prefers-contrast: high) {
+  .nav-item-active {
+    border: 2px solid currentColor;
+    background: rgba(0, 255, 255, 0.2);
+  }
+  
+  .nav-item:focus {
+    border: 2px solid currentColor;
+  }
+}
+/* Responsive Design Helpers */
+@media (max-width: 640px) {
+  .mobile-padding {
+    @apply px-4;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Selection Color */
+::selection {
+  background: rgba(0, 255, 255, 0.3);
+  color: #00c832;
+}
+
+::-moz-selection {
+  background: rgba(0, 255, 255, 0.3);
+  color: #00c832;
+}
