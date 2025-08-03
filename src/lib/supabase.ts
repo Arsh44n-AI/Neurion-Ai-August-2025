@@ -24,8 +24,18 @@ if (!supabaseUrl || !supabaseAnonKey) {
  */
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    persistSession: false, // We don't need session persistence for contact forms
+    persistSession: false,
+    autoRefreshToken: false,
+    detectSessionInUrl: false
   },
+  db: {
+    schema: 'public'
+  },
+  global: {
+    headers: {
+      'X-Client-Info': 'neurion-ai-contact-form'
+    }
+  }
 });
 
 /**
@@ -55,3 +65,88 @@ export interface ContactSubmissionResult {
   data?: ContactMessage;
   error?: string;
 }
+
+/**
+ * Test Supabase connection
+ * @returns Promise<boolean> - True if connection is successful
+ */
+export const testSupabaseConnection = async (): Promise<boolean> => {
+  try {
+    const { data, error } = await supabase
+      .from('contact_messages')
+      .select('count', { count: 'exact', head: true });
+    
+    if (error) {
+      console.error('Supabase connection test failed:', error);
+      return false;
+    }
+    
+    console.log('Supabase connection successful');
+    return true;
+  } catch (error) {
+    console.error('Supabase connection error:', error);
+    return false;
+  }
+};
+
+/**
+ * Submit contact form data to Supabase
+ * @param contactData - The contact form data to submit
+ * @returns Promise<ContactSubmissionResult> - Result of the submission
+ */
+export const submitContactForm = async (
+  contactData: Omit<ContactMessage, 'id' | 'created_at'>
+): Promise<ContactSubmissionResult> => {
+  try {
+    console.log('Submitting contact form data:', contactData);
+    
+    // Insert data into Supabase
+    const { data, error } = await supabase
+      .from('contact_messages')
+      .insert([contactData])
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase insertion error:', error);
+      
+      // Handle specific database errors
+      if (error.code === '23505') {
+        return {
+          success: false,
+          message: 'A message with this email has already been submitted recently.',
+          error: error.message,
+        };
+      }
+      
+      if (error.code === '42501') {
+        return {
+          success: false,
+          message: 'Permission denied. Please check your database policies.',
+          error: error.message,
+        };
+      }
+      
+      return {
+        success: false,
+        message: 'Failed to submit your message. Please try again later.',
+        error: error.message,
+      };
+    }
+
+    console.log('Contact form submitted successfully:', data);
+    
+    return {
+      success: true,
+      message: 'Thank you! Your message has been submitted successfully. We\'ll get back to you within 24 hours.',
+      data: data as ContactMessage,
+    };
+  } catch (error) {
+    console.error('Contact form submission error:', error);
+    return {
+      success: false,
+      message: 'An unexpected error occurred. Please try again later.',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+};

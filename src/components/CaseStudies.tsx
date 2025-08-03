@@ -85,13 +85,13 @@ export const CaseStudies: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-white mb-2 font-mono">CHALLENGE:</h4>
-                    <p className="text-green-300 text-sm font-mono" style={{ textShadow: '0 0 8px rgba(0, 200, 50, 0.5)' }}>
+                    <p className="text-green-300 text-sm font-mono leading-relaxed" style={{ textShadow: '0 0 8px rgba(0, 200, 50, 0.5)', wordSpacing: 'normal', letterSpacing: '0.025em' }}>
                       {study.challenge}
                     </p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-white mb-2 font-mono">SOLUTION:</h4>
-                    <p className="text-green-300 text-sm font-mono" style={{ textShadow: '0 0 8px rgba(0, 200, 50, 0.5)' }}>
+                    <p className="text-green-300 text-sm font-mono leading-relaxed" style={{ textShadow: '0 0 8px rgba(0, 200, 50, 0.5)', wordSpacing: 'normal', letterSpacing: '0.025em' }}>
                       {study.solution}
                     </p>
                   </div>
@@ -120,7 +120,7 @@ export const CaseStudies: React.FC = () => {
                 {/* Testimonial */}
                 <div className="space-y-4">
                   <h4 className="font-semibold text-white font-mono">TESTIMONIAL:</h4>
-                  <blockquote className="text-green-300 italic font-mono" style={{ textShadow: '0 0 8px rgba(0, 200, 50, 0.5)' }}>
+                  <blockquote className="text-green-300 italic font-mono leading-relaxed" style={{ textShadow: '0 0 8px rgba(0, 200, 50, 0.5)', wordSpacing: 'normal', letterSpacing: '0.025em' }}>
                     "{study.testimonial}"
                   </blockquote>
                   <p className="text-sm font-semibold text-cyan-400 font-mono" style={{ textShadow: '0 0 10px rgba(0, 255, 255, 0.6)' }}>

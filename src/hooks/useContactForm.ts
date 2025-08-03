@@ -6,7 +6,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { supabase, ContactMessage, ContactSubmissionResult } from '../lib/supabase';
+import { ContactMessage, ContactSubmissionResult, submitContactForm, testSupabaseConnection } from '../lib/supabase';
 
 /**
  * Form validation errors interface
@@ -56,7 +56,7 @@ const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 /**
  * Phone validation regex pattern (flexible international format)
  */
-const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
+const PHONE_REGEX = /^[\+]?[0-9\s\-\(\)]{10,}$/;
 
 /**
  * Custom hook for contact form management
@@ -94,30 +94,40 @@ export const useContactForm = () => {
       newErrors.first_name = 'First name is required';
     } else if (data.first_name.trim().length < 2) {
       newErrors.first_name = 'First name must be at least 2 characters';
+    } else if (data.first_name.trim().length > 50) {
+      newErrors.first_name = 'First name must be less than 50 characters';
     }
 
     if (!data.last_name.trim()) {
       newErrors.last_name = 'Last name is required';
     } else if (data.last_name.trim().length < 2) {
       newErrors.last_name = 'Last name must be at least 2 characters';
+    } else if (data.last_name.trim().length > 50) {
+      newErrors.last_name = 'Last name must be less than 50 characters';
     }
 
     if (!data.email.trim()) {
       newErrors.email = 'Email address is required';
     } else if (!EMAIL_REGEX.test(data.email.trim())) {
       newErrors.email = 'Please enter a valid email address';
+    } else if (data.email.trim().length > 255) {
+      newErrors.email = 'Email address is too long';
     }
 
     if (!data.company_name.trim()) {
       newErrors.company_name = 'Company name is required';
     } else if (data.company_name.trim().length < 2) {
       newErrors.company_name = 'Company name must be at least 2 characters';
+    } else if (data.company_name.trim().length > 100) {
+      newErrors.company_name = 'Company name must be less than 100 characters';
     }
 
     if (!data.project_details.trim()) {
       newErrors.project_details = 'Project details are required';
     } else if (data.project_details.trim().length < 10) {
       newErrors.project_details = 'Project details must be at least 10 characters';
+    } else if (data.project_details.trim().length > 2000) {
+      newErrors.project_details = 'Project details must be less than 2000 characters';
     }
 
     // Optional field validations
@@ -158,7 +168,7 @@ export const useContactForm = () => {
   }, [sanitizeInput, errors, submitStatus.type]);
 
   /**
-   * Submit form data to Supabase
+   * Submit form data to Supabase with enhanced error handling
    */
   const submitForm = useCallback(async (): Promise<ContactSubmissionResult> => {
     try {
@@ -173,6 +183,14 @@ export const useContactForm = () => {
       setIsSubmitting(true);
       setSubmitStatus({ type: null, message: '' });
 
+      // Test Supabase connection first
+      const connectionTest = await testSupabaseConnection();
+      if (!connectionTest) {
+        return {
+          success: false,
+          message: 'Unable to connect to the database. Please check your internet connection and try again.',
+        };
+      }
       // Prepare data for database insertion
       const contactData: Omit<ContactMessage, 'id' | 'created_at'> = {
         first_name: formData.first_name.trim(),
@@ -185,41 +203,16 @@ export const useContactForm = () => {
         project_details: formData.project_details.trim(),
       };
 
-      // Insert data into Supabase
-      const { data, error } = await supabase
-        .from('contact_messages')
-        .insert([contactData])
-        .select()
-        .single();
+      // Submit form data using the dedicated function
+      const result = await submitContactForm(contactData);
 
-      if (error) {
-        console.error('Supabase insertion error:', error);
-        
-        // Handle specific database errors
-        if (error.code === '23505') { // Unique constraint violation
-          return {
-            success: false,
-            message: 'A message with this email has already been submitted recently.',
-            error: error.message,
-          };
-        }
-        
-        return {
-          success: false,
-          message: 'Failed to submit your message. Please try again later.',
-          error: error.message,
-        };
+      if (result.success) {
+        // Success - reset form and show success message
+        setFormData(initialFormState);
+        setErrors({});
       }
 
-      // Success - reset form and show success message
-      setFormData(initialFormState);
-      setErrors({});
-      
-      return {
-        success: true,
-        message: 'Thank you! Your message has been submitted successfully. We\'ll get back to you within 24 hours.',
-        data: data as ContactMessage,
-      };
+      return result;
 
     } catch (error) {
       console.error('Form submission error:', error);

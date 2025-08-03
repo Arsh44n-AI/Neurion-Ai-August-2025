@@ -95,12 +95,12 @@ export const Services: React.FC = () => {
               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors font-mono" style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.4)' }}>
                 {service.title}
               </h3>
-              <p className="text-green-300 mb-4 leading-relaxed font-mono text-sm" style={{ textShadow: '0 0 10px rgba(0, 200, 50, 0.5)' }}>
+              <p className="text-green-300 mb-4 leading-relaxed font-mono text-sm" style={{ textShadow: '0 0 10px rgba(0, 200, 50, 0.5)', wordSpacing: 'normal', letterSpacing: '0.025em' }}>
                 {service.description}
               </p>
               <ul className="space-y-2">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-sm text-cyan-300 font-mono">
+                  <li key={idx} className="flex items-center text-sm text-cyan-300 font-mono" style={{ wordSpacing: 'normal', letterSpacing: '0.025em' }}>
                     <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-3 flex-shrink-0 shadow-sm shadow-cyan-400/60"></div>
                     {feature}
                   </li>
