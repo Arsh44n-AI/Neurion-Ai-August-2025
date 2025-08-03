@@ -431,8 +431,8 @@ export const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 bg-gradient-to-r from-cyan-400 to-green-400 text-black px-8 py-4 rounded-lg text-lg font-bold flex items-center justify-center hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 font-mono border border-cyan-400 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                  className="flex-1 bg-gradient-to-r from-cyan-400 to-green-400 text-black px-8 py-4 rounded-lg text-lg font-bold flex items-center justify-center hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 font-mono border border-cyan-400 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+                    className="flex-1 bg-gradient-to-r from-cyan-400 to-green-400 text-black px-8 py-4 rounded-lg text-lg font-bold flex items-center justify-center hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 font-mono border border-cyan-400 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+                  >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="mr-2 w-5 h-5 animate-spin" />
@@ -441,7 +441,7 @@ export const Contact: React.FC = () => {
                     ) : (
                       <>
                         SEND MESSAGE
-                    className="px-6 py-4 border-2 border-cyan-400 text-cyan-400 rounded-lg font-bold hover:bg-cyan-400/20 transition-all duration-300 font-mono hover:scale-105"
+                        <Send className="ml-2 w-5 h-5" />
                       </>
                     )}
                   </button>
