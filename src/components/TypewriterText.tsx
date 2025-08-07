@@ -11,7 +11,7 @@ interface TypewriterTextProps {
 export const TypewriterText: React.FC<TypewriterTextProps> = ({
   text,
   delay = 0,
-  speed = 50,
+  speed = 25, // Reduced from 50 to 25 for faster typing
   className = '',
   onComplete
 }) => {
@@ -47,7 +47,7 @@ export const TypewriterText: React.FC<TypewriterTextProps> = ({
       } else if (onComplete) {
         onComplete();
       }
-    }, currentIndex === 0 ? delay : speed);
+    }, currentIndex === 0 ? Math.max(delay, 100) : speed); // Minimum delay of 100ms for better performance
 
     return () => clearTimeout(timer);
   }, [currentIndex, text, delay, speed, isVisible, onComplete]);

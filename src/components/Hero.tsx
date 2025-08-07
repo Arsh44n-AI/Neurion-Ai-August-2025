@@ -21,13 +21,13 @@ export const Hero: React.FC = () => {
           <div className="space-y-8">
             <div className="space-y-6">
               <div className="text-cyan-400 font-semibold text-sm tracking-wide uppercase font-mono">
-                <TypewriterText text=">>> ADVANCED AI AUTOMATION PROTOCOL INITIATED" delay={500} />
+                <TypewriterText text=">>> ADVANCED AI AUTOMATION PROTOCOL INITIATED" delay={200} />
               </div>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight text-white font-mono">
                 <TypewriterText 
                   text="TRANSFORM YOUR BUSINESS WITH " 
-                  delay={2000}
-                  speed={80}
+                  delay={800}
+                  speed={40}
                 />
                 <br />
                 <span 
@@ -42,16 +42,16 @@ export const Hero: React.FC = () => {
                 >
                   <TypewriterText 
                     text="NEURION AI" 
-                    delay={4500}
-                    speed={120}
+                    delay={1800}
+                    speed={60}
                   />
                 </span>
               </h1>
               <p className="text-xl text-green-400 leading-relaxed font-mono font-medium" style={{ textShadow: '0 0 15px rgba(0, 200, 50, 0.7), 0 0 30px rgba(0, 200, 50, 0.3)' }}>
                 <TypewriterText 
                   text="Deploy intelligent automation systems that deliver measurable results. Achieve up to 300% ROI within 90 days with our proven AI solutions."
-                  delay={6000}
-                  speed={30}
+                  delay={2400}
+                  speed={15}
                 />
               </p>
             </div>

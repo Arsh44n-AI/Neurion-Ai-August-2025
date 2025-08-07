@@ -98,7 +98,7 @@ nav {
 
 /* Enhanced Transitions */
 * {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: auto;
 }
 
@@ -116,6 +116,27 @@ nav {
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+/* Optimized animation performance */
+.animate-matrix-fade-in {
+  animation: matrixFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-matrix-pulse {
+  animation: matrixPulse 1.5s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-matrix-glow {
+  animation: matrixGlow 2s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-matrix-float {
+  animation: matrixFloat 3s ease-in-out infinite;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Custom Scrollbar - Matrix Style */

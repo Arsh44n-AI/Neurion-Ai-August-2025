@@ -47,9 +47,9 @@ export const Footer: React.FC = () => {
     <footer className="bg-black border-t border-cyan-400/40 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-          {/* Company Info */}
+          {/* COMMENTED OUT: Get in Touch Section */}
+          {/*
           <div className="lg:col-span-4">
-            {/* Get in Touch Section */}
             <div className="text-center mb-16">
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 font-mono" style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.5)' }}>
                 GET IN TOUCH
@@ -106,8 +106,10 @@ export const Footer: React.FC = () => {
               </div>
             </div>
           </div>
+          */}
 
-          {/* Services */}
+          {/* COMMENTED OUT: Services Section */}
+          {/*
           <div>
             <h3 className="text-lg font-semibold mb-4 text-cyan-400 font-mono">SERVICES</h3>
             <ul className="space-y-2">
@@ -123,6 +125,7 @@ export const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
+          */}
 
           {/* Company - Commented out for now */}
           {/*
